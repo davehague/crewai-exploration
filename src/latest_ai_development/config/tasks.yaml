@@ -1,19 +1,29 @@
 # src/latest_ai_development/config/tasks.yaml
 research_task:
   description: >
-    Conduct a thorough research about {topic}
-    Make sure you find any interesting and relevant information given
-    the current year is 2024.
+    Research and identify events and activities in {topic}.
+    If specific dates are unavailable, find seasonal activities appropriate for the time period.
+    Consider weather conditions, operating hours, and availability.
+    Include pricing, location details, and any special requirements.
   expected_output: >
-    A list with 10 bullet points of the most relevant information about {topic}
+    A list of 10 recommended events/activities, each including:
+    - Date and time availability
+    - Location and transportation options
+    - Pricing and booking requirements
+    - Weather considerations
+    - Estimated duration
   agent: researcher
 
 reporting_task:
   description: >
-    Review the context you got and expand each topic into a full section for a report.
-    Make sure the report is detailed and contains any and all relevant information.
+    Organize the selected events and activities into sensible categories, creating a type of "menu" for the user.
   expected_output: >
-    A fully fledge reports with the mains topics, each with a full section of information.
-    Formatted as markdown without '```'
+    A table of events and activities, with columns for:
+    - Date and time
+    - Activity name
+    - Location or Address
+    - Duration
+    - Cost
+    - Notes/Recommendations
   agent: reporting_analyst
-  output_file: report.md
+  output_file: itinerary.md

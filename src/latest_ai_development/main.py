@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 import sys
 import warnings
-
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from latest_ai_development.crew import LatestAiDevelopment
 
@@ -14,11 +13,22 @@ warnings.filterwarnings("ignore", category=SyntaxWarning, module="pysbd")
 # interpolate any tasks and agents information
 
 
+def get_upcoming_weekend():
+    today = datetime.now()
+    saturday = today + timedelta(days=(5 - today.weekday()) % 7)
+    sunday = saturday + timedelta(days=1)
+    return f"{saturday.strftime('%A, %B %d')} - {sunday.strftime('%A, %B %d')}"
+
+
 def run():
     """
     Run the crew.
     """
-    inputs = {"topic": "AI LLMs", "current_year": str(datetime.now().year)}
+    weekend_dates = get_upcoming_weekend()
+    inputs = {
+        "topic": f"Things to do in Columbus, OH this weekend ({weekend_dates}) for a family of three, with a 4-year old daughter.",
+        "current_year": str(datetime.now().year),
+    }
 
     try:
         LatestAiDevelopment().crew().kickoff(inputs=inputs)
